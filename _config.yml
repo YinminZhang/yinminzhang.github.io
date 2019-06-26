@@ -79,7 +79,7 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/YisraelZhang/blog.git
+  repo: https://github.com/YisraelZhang/blog_next7.git
   branch: gh-pages
 
 # Encrypt
