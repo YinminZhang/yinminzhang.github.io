@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Yisrael Zhang&#39; Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://blog.yisraelzhang.com/"/>
+  <updated>2019-06-26T13:03:08.775Z</updated>
+  <id>https://blog.yisraelzhang.com/</id>
+  
+  <author>
+    <name>Yisrael Zhang</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Quadcopter Project</title>
+    <link href="https://blog.yisraelzhang.com/2019/06/28/1/"/>
+    <id>https://blog.yisraelzhang.com/2019/06/28/1/</id>
+    <published>2019-06-28T06:05:26.000Z</published>
+    <updated>2019-06-26T13:03:08.775Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Reinforcement learning" scheme="https://blog.yisraelzhang.com/categories/Reinforcement-learning/"/>
+    
+    
+      <category term="python" scheme="https://blog.yisraelzhang.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Face Generation</title>
+    <link href="https://blog.yisraelzhang.com/2019/06/27/1/"/>
+    <id>https://blog.yisraelzhang.com/2019/06/27/1/</id>
+    <published>2019-06-27T06:08:56.000Z</published>
+    <updated>2019-06-26T13:09:01.872Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Deep learning" scheme="https://blog.yisraelzhang.com/categories/Deep-learning/"/>
+    
+    
+      <category term="python" scheme="https://blog.yisraelzhang.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dog classification</title>
+    <link href="https://blog.yisraelzhang.com/2019/06/26/1/"/>
+    <id>https://blog.yisraelzhang.com/2019/06/26/1/</id>
+    <published>2019-06-26T05:58:32.000Z</published>
+    <updated>2019-06-26T13:08:49.053Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Deep learning" scheme="https://blog.yisraelzhang.com/categories/Deep-learning/"/>
+    
+    
+      <category term="python" scheme="https://blog.yisraelzhang.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Discrete Harmonic Map</title>
+    <link href="https://blog.yisraelzhang.com/2019/06/25/1/"/>
+    <id>https://blog.yisraelzhang.com/2019/06/25/1/</id>
+    <published>2019-06-25T02:52:40.000Z</published>
+    <updated>2019-06-26T13:03:52.325Z</updated>
+    
+    <summary type="html">
+    
+      这是一篇加密文章，内容可能是个人情感宣泄或者收费技术。如果你确实想看，请与我联系。
+    
+    </summary>
+    
+      <category term="Computer vision" scheme="https://blog.yisraelzhang.com/categories/Computer-vision/"/>
+    
+      <category term="C++" scheme="https://blog.yisraelzhang.com/categories/Computer-vision/C/"/>
+    
+    
+      <category term="Computer vision" scheme="https://blog.yisraelzhang.com/tags/Computer-vision/"/>
+    
+      <category term="C++" scheme="https://blog.yisraelzhang.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Image Warpper</title>
+    <link href="https://blog.yisraelzhang.com/2019/06/23/1/"/>
+    <id>https://blog.yisraelzhang.com/2019/06/23/1/</id>
+    <published>2019-06-23T02:16:32.000Z</published>
+    <updated>2019-06-23T03:30:14.369Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Computer vision" scheme="https://blog.yisraelzhang.com/categories/Computer-vision/"/>
+    
+      <category term="C++" scheme="https://blog.yisraelzhang.com/categories/Computer-vision/C/"/>
+    
+    
+      <category term="Computer vision" scheme="https://blog.yisraelzhang.com/tags/Computer-vision/"/>
+    
+      <category term="C++" scheme="https://blog.yisraelzhang.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://blog.yisraelzhang.com/2019/06/22/hello-world/"/>
+    <id>https://blog.yisraelzhang.com/2019/06/22/hello-world/</id>
+    <published>2019-06-22T00:11:20.000Z</published>
+    <updated>2019-06-26T01:56:27.167Z</updated>
+    
+    <summary type="html">
+    
+      这是一篇加密文章，内容可能是个人情感宣泄或者收费技术。如果你确实想看，请与我联系。
+    
+    </summary>
+    
+      <category term="essay" scheme="https://blog.yisraelzhang.com/categories/essay/"/>
+    
+    
+      <category term="diary" scheme="https://blog.yisraelzhang.com/tags/diary/"/>
+    
+  </entry>
+  
+</feed>
