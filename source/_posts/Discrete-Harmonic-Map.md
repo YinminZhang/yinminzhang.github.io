@@ -10,7 +10,7 @@ tags:
 categories:
 - Computer vision
 - C++
-password: wyq
+password: 
 mathjax: true
 ---
 &emsp;&emsp;Discrete Harmonic Map (DHM) parameterizes disk-like surfaces by minimizing the Dirichlet energy of the (piece-wise linear) mapping functions. It is super easy to implement (if you are familiar with cotangent-weight Laplacian and have a linear solver at hand, it should take no more than a few hours) and generally gives good results. If you never heard about it, Misha's class note  might be helpful.

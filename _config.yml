@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Yisrael Zhang' Blog
+title: Yinmin Zhang' Blog
 subtitle:
 description:
 keywords:
-author: Yisrael Zhang
+author: Yinmin Zhang
 language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://blog.yisraelzhang.com
+url: https://yinminzhang.github.io/blog
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -39,8 +39,8 @@ post_asset_folder: true
 relative_link: false
 future: true
 highlight:
-  enable: true
-  line_number: true
+  enable: false
+  line_number: false
   auto_detect: false
   tab_replace:
   
@@ -79,7 +79,7 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/YisraelZhang/blog_next7.git
+  repo: https://github.com/YinminZhang/yinminzhang.github.io.git
   branch: gh-pages
 
 # Encrypt
