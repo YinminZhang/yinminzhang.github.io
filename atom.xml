@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Yinmin Zhang&#39; Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://yinminzhang.github.io/blog/"/>
+  <updated>2021-06-24T11:32:38.593Z</updated>
+  <id>https://yinminzhang.github.io/blog/</id>
+  
+  <author>
+    <name>Yinmin Zhang</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>setup</title>
+    <link href="https://yinminzhang.github.io/blog/2021/06/24/1/"/>
+    <id>https://yinminzhang.github.io/blog/2021/06/24/1/</id>
+    <published>2021-06-24T11:24:36.000Z</published>
+    <updated>2021-06-24T11:32:38.593Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>VSCode</title>
+    <link href="https://yinminzhang.github.io/blog/2021/01/10/1/"/>
+    <id>https://yinminzhang.github.io/blog/2021/01/10/1/</id>
+    <published>2021-01-10T14:27:46.000Z</published>
+    <updated>2021-06-24T11:15:54.017Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="diary" scheme="https://yinminzhang.github.io/blog/categories/diary/"/>
+    
+    
+      <category term="diary" scheme="https://yinminzhang.github.io/blog/tags/diary/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Discrete Harmonic Map</title>
+    <link href="https://yinminzhang.github.io/blog/2019/06/25/1/"/>
+    <id>https://yinminzhang.github.io/blog/2019/06/25/1/</id>
+    <published>2019-06-25T02:52:40.000Z</published>
+    <updated>2021-06-24T11:15:54.005Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Computer vision" scheme="https://yinminzhang.github.io/blog/categories/Computer-vision/"/>
+    
+      <category term="C++" scheme="https://yinminzhang.github.io/blog/categories/Computer-vision/C/"/>
+    
+    
+      <category term="Computer vision" scheme="https://yinminzhang.github.io/blog/tags/Computer-vision/"/>
+    
+      <category term="C++" scheme="https://yinminzhang.github.io/blog/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Image Warpper</title>
+    <link href="https://yinminzhang.github.io/blog/2019/06/23/1/"/>
+    <id>https://yinminzhang.github.io/blog/2019/06/23/1/</id>
+    <published>2019-06-23T02:16:32.000Z</published>
+    <updated>2021-06-24T11:15:54.011Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Computer vision" scheme="https://yinminzhang.github.io/blog/categories/Computer-vision/"/>
+    
+      <category term="C++" scheme="https://yinminzhang.github.io/blog/categories/Computer-vision/C/"/>
+    
+    
+      <category term="Computer vision" scheme="https://yinminzhang.github.io/blog/tags/Computer-vision/"/>
+    
+      <category term="C++" scheme="https://yinminzhang.github.io/blog/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://yinminzhang.github.io/blog/2019/06/22/hello-world/"/>
+    <id>https://yinminzhang.github.io/blog/2019/06/22/hello-world/</id>
+    <published>2019-06-22T00:11:20.000Z</published>
+    <updated>2021-06-24T11:15:54.017Z</updated>
+    
+    <summary type="html">
+    
+      这是一篇加密文章，内容可能是个人情感宣泄或者收费技术。如果你确实想看，请与我联系。
+    
+    </summary>
+    
+      <category term="essay" scheme="https://yinminzhang.github.io/blog/categories/essay/"/>
+    
+    
+      <category term="diary" scheme="https://yinminzhang.github.io/blog/tags/diary/"/>
+    
+  </entry>
+  
+</feed>
