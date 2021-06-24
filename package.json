@@ -6,6 +6,7 @@
     "version": "3.9.0"
   },
   "dependencies": {
+    "eslint": "^7.29.0",
     "hexo": "^3.9.0",
     "hexo-blog-encrypt": "^2.2.1",
     "hexo-deployer-git": "^1.0.0",
@@ -19,6 +20,7 @@
     "hexo-renderer-marked": "^1.0.1",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.3",
-    "hexo-symbols-count-time": "^0.6.0"
+    "hexo-symbols-count-time": "^0.6.0",
+    "js-yaml": "^4.1.0"
   }
 }
