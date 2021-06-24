@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js">/*pace*/</script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="&amp;emsp;&amp;emsp;Discrete Harmonic Map (DHM) parameterizes disk-like surfaces by minimizing the Dirichlet energy of the (piece-wise linear) mapping functions. It is super easy to implement (if you are fami">
+<meta name="keywords" content="Computer vision,C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Discrete Harmonic Map">
+<meta property="og:url" content="https://yinminzhang.github.io/blog/2019/06/25/1/index.html">
+<meta property="og:site_name" content="Yinmin Zhang&#39; Blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;Discrete Harmonic Map (DHM) parameterizes disk-like surfaces by minimizing the Dirichlet energy of the (piece-wise linear) mapping functions. It is super easy to implement (if you are fami">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/Alex_circle_map.png">
+<meta property="og:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/Alex_go_map.png">
+<meta property="og:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/Alex_uv_map.png">
+<meta property="og:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/sophie_circle_map.png">
+<meta property="og:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/sophie_go_map.png">
+<meta property="og:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/sophie_uv_map.png">
+<meta property="og:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/sophie_circle_iter_map.png">
+<meta property="og:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/sophie_go_iter_map.png">
+<meta property="og:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/sophie_uv_iter_map.png">
+<meta property="og:updated_time" content="2021-06-24T12:09:09.709Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Discrete Harmonic Map">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;Discrete Harmonic Map (DHM) parameterizes disk-like surfaces by minimizing the Dirichlet energy of the (piece-wise linear) mapping functions. It is super easy to implement (if you are fami">
+<meta name="twitter:image" content="https://yinminzhang.github.io/blog/2019/06/25/1/result/Alex_circle_map.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yinmin Zhang' Blog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://yinminzhang.github.io/blog/2019/06/25/1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Discrete Harmonic Map | Yinmin Zhang' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yinmin Zhang' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>时间轴</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/yinminzhang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yinminzhang.github.io/blog/2019/06/25/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yinmin Zhang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinmin Zhang' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Discrete Harmonic Map
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-25 10:52:40" itemprop="dateCreated datePublished" datetime="2019-06-25T10:52:40+08:00">2019-06-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-24 20:09:09" itemprop="dateModified" datetime="2021-06-24T20:09:09+08:00">2021-06-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Computer-vision/" itemprop="url" rel="index"><span itemprop="name">Computer vision</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Computer-vision/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/25/1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/25/1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2019/06/25/1/" class="leancloud_visitors" data-flag-title="Discrete Harmonic Map">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">热度：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+                <span>℃</span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">17k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">15 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;Discrete Harmonic Map (DHM) parameterizes disk-like surfaces by minimizing the Dirichlet energy of the (piece-wise linear) mapping functions. It is super easy to implement (if you are familiar with cotangent-weight Laplacian and have a linear solver at hand, it should take no more than a few hours) and generally gives good results. If you never heard about it, Misha’s class note  might be helpful.</p>
+<h1 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h1><h2 id="Cotangent-Edge-Weight"><a href="#Cotangent-Edge-Weight" class="headerlink" title="Cotangent Edge Weight"></a>Cotangent Edge Weight</h2><pre><code class="C++">template&lt;typename M&gt;
+void CHarmonicMapper&lt;M&gt;::_calculate_edge_weight()
+{
+    //compute edge length
+    for (M::MeshEdgeIterator eiter(m_pMesh); !eiter.end(); ++eiter)
+    {
+        M::CEdge* pE = *eiter;
+        M::CVertex* v1 = m_pMesh-&gt;edgeVertex1(pE);
+        M::CVertex* v2 = m_pMesh-&gt;edgeVertex2(pE);
+        pE-&gt;length() = (v1-&gt;point() - v2-&gt;point()).norm();
+    }
+
+    //compute corner angle
+    for (M::MeshEdgeIterator eiter(m_pMesh); !eiter.end(); ++eiter)
+    {
+        M::CEdge* pE = *eiter;
+        if (pE-&gt;boundary())
+            continue;
+
+        for (int i = 0; i &lt; 2; ++i)
+        {
+            M::CHalfEdge* h = m_pMesh-&gt;edgeHalfedge(pE, i);
+
+            double h_j = m_pMesh-&gt;halfedgeEdge((M::CHalfEdge*)h-&gt;he_next())-&gt;length();
+            double h_k = m_pMesh-&gt;halfedgeEdge((M::CHalfEdge*)h-&gt;he_prev())-&gt;length();
+
+            h-&gt;angle() = _inverse_cosine_law(h_j, h_k, pE-&gt;length());
+        }
+    }
+
+    //compute edge weight
+    for (M::MeshEdgeIterator eiter(m_pMesh); !eiter.end(); ++eiter)
+    {
+        M::CEdge* pE = *eiter;
+        M::CHalfEdge* h0 = m_pMesh-&gt;edgeHalfedge(pE, 0);
+        M::CHalfEdge* h1 = m_pMesh-&gt;edgeHalfedge(pE, 1);
+
+        pE-&gt;weight() = 0.5 * (1 / tan(h0-&gt;angle() + 1 / tan(h1-&gt;angle())));
+    }
+}</code></pre>
+<h2 id="Set-Boundary-Condition"><a href="#Set-Boundary-Condition" class="headerlink" title="Set Boundary Condition"></a>Set Boundary Condition</h2><pre><code class="c++">template&lt;typename M&gt;
+void CHarmonicMapper&lt;M&gt;::_set_boundary()
+{
+    //get the boundary half edge loop
+    std::vector&lt;M::CLoop*&gt; &amp; pLs =  m_boundary.loops();
+    assert( pLs.size() == 1 );
+    M::CLoop * pL = pLs[0];
+    std::list&lt;M::CHalfEdge*&gt; &amp; pHs = pL-&gt;halfedges();
+
+    //compute the total length of the boundary
+    double total_length = pL-&gt;length();
+
+    //parameterize the boundary using arc length parameter
+    double current_length = 0;
+    for (std::list&lt;M::CHalfEdge*&gt;::iterator hiter = pHs.begin(); hiter != pHs.end(); hiter++) 
+    {
+        M::CHalfEdge* pH = *hiter;
+
+        M::CEdge* pE = m_pMesh-&gt;halfedgeEdge(pH);
+        current_length += pE-&gt;length();
+        double angle = 2 * PI / total_length * current_length;
+
+        MeshLib::CPoint2* huv = new MeshLib::CPoint2(0.5 + 0.5 * cos(angle), 0.5 + 0.5 * sin(angle));
+        M::CVertex* pV = m_pMesh-&gt;halfedgeTarget(pH);
+        pV-&gt;huv() = *huv;
+    }
+}</code></pre>
+<h2 id="Iterative-Algorithm-for-Harmonic-Map"><a href="#Iterative-Algorithm-for-Harmonic-Map" class="headerlink" title="Iterative Algorithm for Harmonic Map"></a>Iterative Algorithm for Harmonic Map</h2><pre><code class="c++">template&lt;typename M&gt;
+void CHarmonicMapper&lt;M&gt;::_iterative_map( double epsilon )
+{
+    //fix the boundary
+    _set_boundary();
+
+    //move interior each vertex to its center of neighbors
+
+    for (M::MeshVertexIterator viter(m_pMesh); !viter.end(); ++viter) {
+        M::CVertex* pV = *viter;
+        if (pV-&gt;boundary())
+            continue;
+        MeshLib::CPoint2* huv = new MeshLib::CPoint2(0, 0);
+        pV-&gt;huv() = *huv;
+    }
+
+    while (true)
+    {
+        double error = -1e+10;
+        //move interior each vertex to its center of neighbors
+        for (M::MeshVertexIterator viter(m_pMesh); !viter.end(); ++viter) 
+        {
+            M::CVertex* pV = *viter;
+            if (pV-&gt;boundary())
+                continue;
+            double total_weight = 0;
+            CPoint2 huv(0, 0);
+            for (M::VertexVertexIterator vviter(pV); !vviter.end(); ++vviter) 
+            {
+                M::CVertex* pW = *vviter;
+                M::CEdge* pE = m_pMesh-&gt;vertexEdge(pV, pW);
+                double weight = pE-&gt;weight();
+                total_weight += weight;
+                huv = huv + pW-&gt;huv() * weight;
+            }
+            huv = huv / total_weight;
+            double _error = (pV-&gt;huv() - huv).norm();
+            error = (_error &gt; error) ? _error : error;
+            pV-&gt;huv() = huv;
+        }
+
+        if (error &lt; epsilon) break;
+    }
+
+}</code></pre>
+<h2 id="Direct-Algorithm-for-Harmonic-Map-Extra-Credit-amp-Numerical-Method"><a href="#Direct-Algorithm-for-Harmonic-Map-Extra-Credit-amp-Numerical-Method" class="headerlink" title="Direct Algorithm for Harmonic Map (Extra Credit) &amp; Numerical Method"></a>Direct Algorithm for Harmonic Map (Extra Credit) &amp; Numerical Method</h2><pre><code class="c++">template&lt;typename M&gt;
+void CHarmonicMapper&lt;M&gt;::_map()
+{
+
+    //fix the boundary
+    _set_boundary();
+
+    std::vector&lt;Eigen::Triplet&lt;double&gt; &gt; A_coefficients;
+    std::vector&lt;Eigen::Triplet&lt;double&gt; &gt; B_coefficients;
+
+
+    //set the matrix A
+    for( M::MeshVertexIterator viter( m_pMesh ); !viter.end(); ++ viter )
+    {
+        M::CVertex * pV = *viter;
+        if( pV-&gt;boundary() ) continue;
+        int vid = pV-&gt;idx();
+
+        double sw = 0;
+        for( M::VertexVertexIterator witer( pV ); !witer.end(); ++ witer )
+        {
+            M::CVertex * pW = *witer;
+            int wid = pW-&gt;idx();
+
+            M::CEdge * e = m_pMesh-&gt;vertexEdge( pV, pW );
+            double w = e-&gt;weight();
+
+            if( pW-&gt;boundary() )
+            {
+                B_coefficients.push_back( Eigen::Triplet&lt;double&gt;(vid,wid,w) );
+            }
+            else
+            {
+                A_coefficients.push_back( Eigen::Triplet&lt;double&gt;(vid,wid, -w) );
+            }
+            sw += w;
+        }
+        A_coefficients.push_back( Eigen::Triplet&lt;double&gt;(vid,vid, sw ) );
+    }
+
+
+    Eigen::SparseMatrix&lt;double&gt; A( m_interior_vertices, m_interior_vertices );
+    A.setZero();
+
+    Eigen::SparseMatrix&lt;double&gt; B( m_interior_vertices, m_boundary_vertices );
+    B.setZero();
+    A.setFromTriplets(A_coefficients.begin(), A_coefficients.end());
+    B.setFromTriplets(B_coefficients.begin(), B_coefficients.end());
+
+
+    Eigen::ConjugateGradient&lt;Eigen::SparseMatrix&lt;double&gt;&gt; solver;
+    std::cerr &lt;&lt; &quot;Eigen Decomposition&quot; &lt;&lt; std::endl;
+    solver.compute(A);
+    std::cerr &lt;&lt; &quot;Eigen Decomposition Finished&quot; &lt;&lt; std::endl;
+
+    if( solver.info() != Eigen::Success )
+    {
+        std::cerr &lt;&lt; &quot;Waring: Eigen decomposition failed&quot; &lt;&lt; std::endl;
+    }
+
+
+    for( int k = 0; k &lt; 2; k ++ )
+    {
+        Eigen::VectorXd b(m_boundary_vertices);
+        //set boundary constraints b vector
+        for (M::MeshVertexIterator viter(m_pMesh); !viter.end(); ++viter) {
+            M::CVertex* pV = *viter;
+            if (!pV-&gt;boundary())
+                continue;
+            int id = pV-&gt;idx();
+            b(id) = pV-&gt;huv()[k];
+        }
+
+        Eigen::VectorXd c(m_interior_vertices);
+        c = B * b;
+
+        Eigen::VectorXd x = solver.solve(c);
+        if( solver.info() != Eigen::Success )
+        {
+            std::cerr &lt;&lt; &quot;Waring: Eigen decomposition failed&quot; &lt;&lt; std::endl;
+        }
+
+        //set the images of the harmonic map to interior vertices
+        for (M::MeshVertexIterator viter(m_pMesh); !viter.end(); ++viter) {
+            M::CVertex* pV = *viter;
+            if (pV-&gt;boundary())
+                continue;
+            int id = pV-&gt;idx();
+            pV-&gt;huv()[k] = x(id);
+        }
+    }
+}</code></pre>
+<h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><h2 id="Cotangent-Edge-Weight-1"><a href="#Cotangent-Edge-Weight-1" class="headerlink" title="Cotangent Edge Weight"></a>Cotangent Edge Weight</h2><h3 id="Compute-edge-length"><a href="#Compute-edge-length" class="headerlink" title="Compute edge length"></a>Compute edge length</h3><p><font size="3">Compute the edge length, suppose $e = [v_i , v_j ]$, then<br>$$l(e) = |v_j − v_i |.$$</font></p>
+<font size="3">
+- use $MeshEdgeIterator$ to find all of edges on m_pMesh
+- use $m_pMesh->halfedgeVertex1(Edge)$ to find the first vertex of an edge
+- use $m_pMesh->halfedgeVertex2(Edge)$ to find the second vertex of an edge
+- $point.norm()$ calculate the norm of the CPoint $\sqrt{x^2+y^2+z^2}$
+
+<pre><code class="c++">for (M::MeshEdgeIterator eiter(m_pMesh); !eiter.end(); ++eiter)
+    {
+        M::CEdge* pE = *eiter;
+        M::CVertex* v1 = m_pMesh-&gt;edgeVertex1(pE);
+        M::CVertex* v2 = m_pMesh-&gt;edgeVertex2(pE);
+        pE-&gt;length() = (v1-&gt;point() - v2-&gt;point()).norm();
+    }</code></pre>
+<h3 id="Compute-corner-angle"><a href="#Compute-corner-angle" class="headerlink" title="Compute corner angle"></a>Compute corner angle</h3><font size="3">
+Compute the corner angles of each triangular face, suppose $[v_i , v_j , v_k ]$
+is a face, with edges $e_i , e_j , e_k ,$ where e_i is against the vertex v_i . The corresponding edge lengths are $l_i , l_j$ and $l_k$ . The inversive cosine law gives
+
+<pre><code>$$ \theta_i = acos \frac {l_j^2 + l_k^2 -l_i^2} {2 l_j l_k} $$</code></pre><font size="3">
+- use $MeshEdgeIterator$ to find all of edges on m_pMesh
+- use $pE->boundary()$ to judge whether the edge is on the boundary
+- use $m_pMesh->halfedgeEdge(halfedge)$ to attach halfedge to an edge
+- use $halfedge->he\_next()$ to find the next halfedge of a halfedge
+- $\_inverse\_cosine\_law(l_j,l_k,l_i)$ calculate the acos
+
+<pre><code class="c++">for (M::MeshEdgeIterator eiter(m_pMesh); !eiter.end(); ++eiter)
+    {
+        M::CEdge* pE = *eiter;
+        if (pE-&gt;boundary())
+            continue;
+
+        for (int i = 0; i &lt; 2; ++i)
+        {
+            M::CHalfEdge* h = m_pMesh-&gt;edgeHalfedge(pE, i);
+
+            double h_j = m_pMesh-&gt;halfedgeEdge((M::CHalfEdge*)h-&gt;he_next())-&gt;length();
+            double h_k = m_pMesh-&gt;halfedgeEdge((M::CHalfEdge*)h-&gt;he_prev())-&gt;length();
+
+            h-&gt;angle() = _inverse_cosine_law(h_j, h_k, pE-&gt;length());
+        }
+    }</code></pre>
+<h3 id="Compute-edge-weight"><a href="#Compute-edge-weight" class="headerlink" title="Compute edge weight"></a>Compute edge weight</h3><font size="3">
+The cotangent edge weight is as follows. Suppose edge $[v_i , v_j , v_k ] $
+    and $[v_j , v_i , v_l ]$ share an edge $[v_i , v_j ]$, then
+    $$w_{ij}=\frac 1 2 (cot\theta_k^{ij} + cot\theta_l^{ji})$$
+
+<font size="3">
+- use $Edge->weight()$ to get the weight of edge
+- use $HalfEdge->angle()$ to get the angle of halfege
+- use $1/ tan(\theta)$ to calculate $cot\theta$
+
+<pre><code class="c++">for (M::MeshEdgeIterator eiter(m_pMesh); !eiter.end(); ++eiter)
+    {
+        M::CEdge* pE = *eiter;
+        M::CHalfEdge* h0 = m_pMesh-&gt;edgeHalfedge(pE, 0);
+        M::CHalfEdge* h1 = m_pMesh-&gt;edgeHalfedge(pE, 1);
+
+        pE-&gt;weight() = 0.5 * (1 / tan(h0-&gt;angle() + 1 / tan(h1-&gt;angle())));
+    }</code></pre>
+<h2 id="Set-Boundary-Condition-1"><a href="#Set-Boundary-Condition-1" class="headerlink" title="Set Boundary Condition"></a>Set Boundary Condition</h2><h3 id="Get-the-boundary-half-edge-loop"><a href="#Get-the-boundary-half-edge-loop" class="headerlink" title="Get the boundary half edge loop"></a>Get the boundary half edge loop</h3><font size="3">
+- use $Boundary.loops()$ to get the list of boundary loops
+- use $Loop->halfedge()$ to get the the list of haledges on the current boundary loop
+
+<pre><code class="C++">    std::vector&lt;M::CLoop*&gt; &amp; pLs =  m_boundary.loops();
+    assert( pLs.size() == 1 );
+    M::CLoop * pL = pLs[0];
+    std::list&lt;M::CHalfEdge*&gt; &amp; pHs = pL-&gt;halfedges();</code></pre>
+<h3 id="Compute-the-total-length-of-the-boundary"><a href="#Compute-the-total-length-of-the-boundary" class="headerlink" title="Compute the total length of the boundary"></a>Compute the total length of the boundary</h3><font size="3">
+Suppose the boundary vertices are sorted counter-clock-wisely, 
+as $\{v_0 , v_1 , · · · , v_{n−1} \}$. The total length of the boundary is given by
+    $$s = \sum_{i=0}^{n-1}|v_{i+1}-v_i| $$
+
+<font size="3">
+- use $Loop->length()$ to get the length of the current boundary loop
+
+<pre><code class="c++">double total_length = pL-&gt;length();</code></pre>
+<h3 id="Parameterize-the-boundary-using-arc-length-parameter"><a href="#Parameterize-the-boundary-using-arc-length-parameter" class="headerlink" title="Parameterize the boundary using arc length parameter"></a>Parameterize the boundary using arc length parameter</h3><font size="3">
+    The image of $v_i \in \partial M$ is given by
+    $$\begin{cases}
+    \theta_i = \frac {2\pi} s \sum_{j=0}^{i-1}|v_{j+1}- v_j|\\
+    \phi(v_i)=(\frac {1+cos\theta_i} 2, \frac {1+sin\theta_i} 2)
+    \end{cases}$$
+
+<pre><code class="c++">    double current_length = 0;
+    for (std::list&lt;M::CHalfEdge*&gt;::iterator hiter = pHs.begin(); hiter != pHs.end(); hiter++) 
+    {
+        M::CHalfEdge* pH = *hiter;
+
+        M::CEdge* pE = m_pMesh-&gt;halfedgeEdge(pH);
+        current_length += pE-&gt;length();
+        double angle = 2 * PI / total_length * current_length;
+
+        MeshLib::CPoint2* huv = new MeshLib::CPoint2(0.5 + 0.5 * cos(angle), 0.5 + 0.5 * sin(angle));
+        M::CVertex* pV = m_pMesh-&gt;halfedgeTarget(pH);
+        pV-&gt;huv() = *huv;
+    }</code></pre>
+<h2 id="Iterative-Algorithm-for-Harmonic-Map-1"><a href="#Iterative-Algorithm-for-Harmonic-Map-1" class="headerlink" title="Iterative Algorithm for Harmonic Map"></a>Iterative Algorithm for Harmonic Map</h2><font size="3">
+First, for each interior vertex $v_i \notin \partial M$, set $\phi(v_i ) = (0, 0)$. Second, for each interior vertex, move its image to the mass center of the images of its neighbors,
+    $$c_i = \frac {\sum_j w_{ij}\phi(v_j)} {\sum_j w_ij}, \phi(v_i)\leftarrow c_i$$
+    repeat this procedure, until the algorithm converges.
+
+<h3 id="For-each-interior-vertex-v-i-notin-partial-M-set-phi-v-i-0-0"><a href="#For-each-interior-vertex-v-i-notin-partial-M-set-phi-v-i-0-0" class="headerlink" title="For each interior vertex $v_i \notin \partial M$, set $\phi(v_i ) = (0, 0)$"></a>For each interior vertex $v_i \notin \partial M$, set $\phi(v_i ) = (0, 0)$</h3><font size="3">
+- use $pE->boundary()$ to judge whether the edge is on the boundary
+
+<pre><code class="c++">for (M::MeshVertexIterator viter(m_pMesh); !viter.end(); ++viter) 
+{
+        M::CVertex* pV = *viter;
+        if (pV-&gt;boundary())
+            continue;
+        MeshLib::CPoint2* huv = new MeshLib::CPoint2(0, 0);
+        pV-&gt;huv() = *huv;
+}</code></pre>
+<h3 id="Move-interior-each-vertex-to-its-center-of-neighbors"><a href="#Move-interior-each-vertex-to-its-center-of-neighbors" class="headerlink" title="Move interior each vertex to its center of neighbors"></a>Move interior each vertex to its center of neighbors</h3><font size="3">
+- use $MeshVertexIterator$ to find all of edges on m_pMesh
+- use $VertexVertexIterator$ to transverse all the neighboring vertices of a vertex
+- use $Edge->vertexEdge(vertex0, vertex2)$ to access an edge by its two end vertices
+- use $m_pMesh->weight()$ to get the weight of edge
+- use $Vertex->huv()$ to get the $\phi(v_i)$ of interior vertex
+
+
+<pre><code class="c++">while (true)
+    {
+        double error = -1e+10;
+        for (M::MeshVertexIterator viter(m_pMesh); !viter.end(); ++viter) 
+        {
+            M::CVertex* pV = *viter;
+            if (pV-&gt;boundary())
+                continue;
+            double total_weight = 0;
+            CPoint2 huv(0, 0);
+            for (M::VertexVertexIterator vviter(pV); !vviter.end(); ++vviter) 
+            {
+                M::CVertex* pW = *vviter;
+                M::CEdge* pE = m_pMesh-&gt;vertexEdge(pV, pW);
+                double weight = pE-&gt;weight();
+                total_weight += weight;
+                huv = huv + pW-&gt;huv() * weight;
+            }
+            huv = huv / total_weight;
+            double _error = (pV-&gt;huv() - huv).norm();
+            error = (_error &gt; error) ? _error : error;
+            pV-&gt;huv() = huv;
+        }
+
+        if (error &lt; epsilon) break;
+    }</code></pre>
+<h2 id="Direct-Algorithm-for-Harmonic-Map-Extra-Credit"><a href="#Direct-Algorithm-for-Harmonic-Map-Extra-Credit" class="headerlink" title="Direct Algorithm for Harmonic Map (Extra Credit)"></a>Direct Algorithm for Harmonic Map (Extra Credit)</h2><p><font size="3">For each interior vertex $v_i \notin \partial M$, establish one linear equation<br>    $$\sum_j w_{ij}(\phi(v_i)-\phi(v_j)) = 0$$<br>   solve this sparse linear system, the result is the harmonic map.</font></p>
+<pre><code class="c++">//set boundary constraints b vector
+for (M::MeshVertexIterator viter(m_pMesh); !viter.end(); ++viter)
+{
+    M::CVertex* pV = *viter;
+    if (!pV-&gt;boundary())
+        continue;
+    int id = pV-&gt;idx();
+    b(id) = pV-&gt;huv()[k];
+}</code></pre>
+<pre><code class="c++">//set the images of the harmonic map to interior vertices
+for (M::MeshVertexIterator viter(m_pMesh); !viter.end(); ++viter) 
+{
+    M::CVertex* pV = *viter;
+    if (pV-&gt;boundary())
+        continue;
+    int id = pV-&gt;idx();
+    pV-&gt;huv()[k] = x(id);
+}</code></pre>
+<p><font size="3">This assignment uses Eigen library to solve large sparse linear system. The following commands will be useful.</font></p>
+<pre><code class="c++">std::vector&lt;Eigen::Triplet&lt;double&gt; &gt; A_coefficients; 
+A_coefficients.push_back( Eigen::Triplet&lt;double&gt;(vid,wid, -w) ); 
+Eigen::SparseMatrix&lt;double&gt; A( m_interior_vertices, m_interior_vertices );
+
+A.setZero();
+
+A.setFromTriplets(A_coefficients.begin(), A_coefficients.end()); Eigen::ConjugateGradient&lt;Eigen::SparseMatrix&lt;double&gt;&gt; solver; 
+std::cerr &lt;&lt; &quot;Eigen Decomposition&quot; &lt;&lt; std::endl; solver.compute(A); 
+std::cerr &lt;&lt; &quot;Eigen Decomposition Finished&quot; &lt;&lt; std::endl;
+
+if( solver.info() != Eigen::Success ) 
+{ 
+    std::cerr &lt;&lt; &quot;Waring: Eigen decomposition failed&quot; &lt;&lt; std::endl; 
+} 
+Eigen::VectorXd b(m_boundary_vertices); 
+Eigen::VectorXd x = solver.solve(c); 
+if( solver.info() != Eigen::Success ) 
+{ 
+    std::cerr &lt;&lt; &quot;Waring: Eigen decomposition failed&quot; &lt;&lt; std::endl; 
+}</code></pre>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p><font size="3">In this section, we show the result of harmonic mapping separately.</font></p>
+<ul>
+<li>Direct Algorithm for Harmonic Map(Fig. 3.1 &amp; Fig. 3.2)     <br></li>
+<li>Iterative Algorithm for Harmonic Map(Fig. 3.3)</li>
+</ul>
+<font size="3">
+<table>
+    <tr>
+        <td><img src="./result/Alex_circle_map.png"></td>
+        <td><img src="./result/Alex_go_map.png"></td>
+        <td><img src="./result/Alex_uv_map.png"></td>
+    </tr>   
+</table>
+    <center>Fig. 3.1. Harmonic Map On Alex 
+
+<font size="3">
+<table>
+    <tr>
+        <td><img src="./result/sophie_circle_map.png"></td>
+        <td><img src="./result/sophie_go_map.png"></td>
+        <td><img src="./result/sophie_uv_map.png"></td>
+    </tr>   
+</table>
+    <center>Fig. 3.2. Harmonic Map On Sophie
+
+<font size="3">
+<table>
+    <tr>
+        <td><img src="./result/sophie_circle_iter_map.png"></td>
+        <td><img src="./result/sophie_go_iter_map.png"></td>
+        <td><img src="./result/sophie_uv_iter_map.png"></td>
+    </tr>   
+</table>
+    <center>Fig. 3.3. Iterative Harmonic Map On Sophie
+
+<font size="3">
+Data from sophie.uv.m
+
+<pre><code>Vertex 54475 103.073 50.793 26.4526 {rgb=(0.117956 0.117956 0.117956) uv=(0.999907 0.490347)}
+Vertex 54480 107.076 50.7952 27.7994 {rgb=(0.151779 0.151779 0.151779) uv=(0.999013 0.468605)}
+Vertex 54487 108.817 50.7937 28.1584 {rgb=(0.156541 0.156541 0.156541) uv=(0.998355 0.459469)}
+Vertex 54496 114.037 50.795 29.4016 {rgb=(0.174857 0.174857 0.174857) uv=(0.995353 0.431987)}
+Vertex 54505 117.28 50.7941 29.6458 {rgb=(0.16433 0.16433 0.16433) uv=(0.992795 0.415427)}</code></pre><p><font size="3">Data generated by Direct Algorithm for Harmonic Map</font></p>
+<pre><code>Vertex 54475  0.999907 0.490347 0 {rgb=(0.117956 0.117956 0.117956)}
+Vertex 54480  0.999013 0.468605 0 {rgb=(0.151779 0.151779 0.151779)}
+Vertex 54487  0.998355 0.459469 0 {rgb=(0.156541 0.156541 0.156541)}
+Vertex 54496  0.995353 0.431987 0 {rgb=(0.174857 0.174857 0.174857)}
+Vertex 54505  0.992795 0.415427 0 {rgb=(0.16433 0.16433 0.16433)}</code></pre><p><font size="3">Data generated by Iterative Algorithm for Harmonic Map</font></p>
+<pre><code>Vertex 54475  0.999907 0.490347 0 {rgb=(0.117956 0.117956 0.117956)}
+Vertex 54480  0.999013 0.468605 0 {rgb=(0.151779 0.151779 0.151779)}
+Vertex 54487  0.998355 0.459469 0 {rgb=(0.156541 0.156541 0.156541)}
+Vertex 54496  0.995353 0.431987 0 {rgb=(0.174857 0.174857 0.174857)}
+Vertex 54505  0.992795 0.415427 0 {rgb=(0.16433 0.16433 0.16433)}</code></pre></font></center></font></center></font></center></font></font></font></font></font></font></font></font></font></font></font></font></font>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文标题:</span><a href="/2019/06/25/1/">Discrete Harmonic Map</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Yinmin Zhang 的个人博客">Yinmin Zhang</a></p>
+  <p><span>发布时间:</span>2019年06月25日 - 10:06</p>
+  <p><span>最后更新:</span>2021年06月24日 - 20:06</p>
+  <p><span>原始链接:</span><a href="/2019/06/25/1/" title="Discrete Harmonic Map">https://yinminzhang.github.io/blog/2019/06/25/1/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://yinminzhang.github.io/blog/2019/06/25/1/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+
+      
+    </div>
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Computer-vision/" rel="tag"><i class="fa fa-tag"></i> Computer vision</a>
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/23/1/" rel="next" title="Image Warpper">
+                <i class="fa fa-chevron-left"></i> Image Warpper
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/10/1/" rel="prev" title="VSCode">
+                VSCode <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Yinmin Zhang">
+            
+              <p class="site-author-name" itemprop="name">Yinmin Zhang</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          <!--my custom code begin-->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+          <script type="text/javascript">
+            $("#sidebar").hover(function(){
+              $("#mydivshow").velocity('stop').velocity({opacity: 1});
+            },function(){
+              $("#mydivshow").velocity('stop').velocity({opacity: 0});
+            });
+          </script>
+          <div id="mydivshow" class="mydivshow">
+          <!--my custom code end-->
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/yinminzhang" title="GitHub &rarr; https://github.com/yinminzhang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:YisraelZhang@gmail.com" title="E-Mail &rarr; mailto:YisraelZhang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://instagram.com/yourname" title="QQ &rarr; https://instagram.com/yourname" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ruoyugao.github.io/" title="https://ruoyugao.github.io/" rel="noopener" target="_blank">Aron.Gao</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="300" height="100" src="//music.163.com/outchain/player?type=1&id=74267010&auto=0&height=80"></iframe>
+
+        </div>
+      </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Source-Code"><span class="nav-number">1.</span> <span class="nav-text">Source Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cotangent-Edge-Weight"><span class="nav-number">1.1.</span> <span class="nav-text">Cotangent Edge Weight</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Boundary-Condition"><span class="nav-number">1.2.</span> <span class="nav-text">Set Boundary Condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterative-Algorithm-for-Harmonic-Map"><span class="nav-number">1.3.</span> <span class="nav-text">Iterative Algorithm for Harmonic Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Direct-Algorithm-for-Harmonic-Map-Extra-Credit-amp-Numerical-Method"><span class="nav-number">1.4.</span> <span class="nav-text">Direct Algorithm for Harmonic Map (Extra Credit) &amp; Numerical Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">2.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cotangent-Edge-Weight-1"><span class="nav-number">2.1.</span> <span class="nav-text">Cotangent Edge Weight</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compute-edge-length"><span class="nav-number">2.1.1.</span> <span class="nav-text">Compute edge length</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compute-corner-angle"><span class="nav-number">2.1.2.</span> <span class="nav-text">Compute corner angle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compute-edge-weight"><span class="nav-number">2.1.3.</span> <span class="nav-text">Compute edge weight</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Boundary-Condition-1"><span class="nav-number">2.2.</span> <span class="nav-text">Set Boundary Condition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-the-boundary-half-edge-loop"><span class="nav-number">2.2.1.</span> <span class="nav-text">Get the boundary half edge loop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compute-the-total-length-of-the-boundary"><span class="nav-number">2.2.2.</span> <span class="nav-text">Compute the total length of the boundary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameterize-the-boundary-using-arc-length-parameter"><span class="nav-number">2.2.3.</span> <span class="nav-text">Parameterize the boundary using arc length parameter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterative-Algorithm-for-Harmonic-Map-1"><span class="nav-number">2.3.</span> <span class="nav-text">Iterative Algorithm for Harmonic Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#For-each-interior-vertex-v-i-notin-partial-M-set-phi-v-i-0-0"><span class="nav-number">2.3.1.</span> <span class="nav-text">For each interior vertex $v_i \notin \partial M$, set $\phi(v_i ) = (0, 0)$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Move-interior-each-vertex-to-its-center-of-neighbors"><span class="nav-number">2.3.2.</span> <span class="nav-text">Move interior each vertex to its center of neighbors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Direct-Algorithm-for-Harmonic-Map-Extra-Credit"><span class="nav-number">2.4.</span> <span class="nav-text">Direct Algorithm for Harmonic Map (Extra Credit)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Result"><span class="nav-number">3.</span> <span class="nav-text">Result</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yinmin Zhang</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">27k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">24 分钟</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,104,183" opacity="1" zindex="-2" count="120" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'SDKAuIGHTmlV9h54JYlTEOra-MdYXbMMI',
+    appKey: 'TeSbB5xl4sdjOLoj4TsMNn0g',
+    placeholder: '麻衣学姐世界第一可爱!',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'SDKAuIGHTmlV9h54JYlTEOra-MdYXbMMI')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'SDKAuIGHTmlV9h54JYlTEOra-MdYXbMMI',
+                'X-LC-Key': 'TeSbB5xl4sdjOLoj4TsMNn0g',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+            if (localhost.test(document.URL)) return;
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      const selection = document.getSelection();
+      const selected = selection.rangeCount > 0 ? selection.getRangeAt(0) : false;
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+      if (selected) {
+        selection.removeAllRanges();
+        selection.addRange(selected);
+      }
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
